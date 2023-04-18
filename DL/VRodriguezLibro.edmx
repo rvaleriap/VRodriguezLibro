@@ -1,0 +1,226 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="VRodriguezLibroModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Autor">
+          <Key>
+            <PropertyRef Name="IdAutor" />
+          </Key>
+          <Property Name="IdAutor" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NombreAutor" Type="varchar" MaxLength="50" />
+          <Property Name="ApellidoPaterno" Type="varchar" MaxLength="50" />
+          <Property Name="ApellidoMaterno" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Libro">
+          <Key>
+            <PropertyRef Name="IdLibro" />
+          </Key>
+          <Property Name="IdLibro" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" MaxLength="50" />
+          <Property Name="FechaPublicacion" Type="varchar" MaxLength="50" />
+          <Property Name="NumeroPaginas" Type="int" />
+          <Property Name="IdAutor" Type="int" />
+        </EntityType>
+        <Association Name="FK__Libro__IdAutor__164452B1">
+          <End Role="Autor" Type="Self.Autor" Multiplicity="0..1" />
+          <End Role="Libro" Type="Self.Libro" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Autor">
+              <PropertyRef Name="IdAutor" />
+            </Principal>
+            <Dependent Role="Libro">
+              <PropertyRef Name="IdAutor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="AddLibro" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Nombre" Type="varchar" Mode="In" />
+          <Parameter Name="FechaPublicacion" Type="varchar" Mode="In" />
+          <Parameter Name="NumeroPaginas" Type="int" Mode="In" />
+          <Parameter Name="IdAutor" Type="int" Mode="In" />
+        </Function>
+        <Function Name="DeleteLibro" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="IdLibro" Type="int" Mode="In" />
+        </Function>
+        <Function Name="GetAllLibro" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="GetByIdLibro" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="IdLibro" Type="int" Mode="In" />
+        </Function>
+        <Function Name="UpdateLibro" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="IdLibro" Type="int" Mode="In" />
+          <Parameter Name="Nombre" Type="varchar" Mode="In" />
+          <Parameter Name="FechaPublicacion" Type="varchar" Mode="In" />
+          <Parameter Name="NumeroPaginas" Type="int" Mode="In" />
+          <Parameter Name="IdAutor" Type="int" Mode="In" />
+        </Function>
+        <EntityContainer Name="VRodriguezLibroModelStoreContainer">
+          <EntitySet Name="Autor" EntityType="Self.Autor" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Libro" EntityType="Self.Libro" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Libro__IdAutor__164452B1" Association="Self.FK__Libro__IdAutor__164452B1">
+            <End Role="Autor" EntitySet="Autor" />
+            <End Role="Libro" EntitySet="Libro" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="VRodriguezLibroModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Autor">
+          <Key>
+            <PropertyRef Name="IdAutor" />
+          </Key>
+          <Property Name="IdAutor" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NombreAutor" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ApellidoPaterno" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ApellidoMaterno" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Libroes" Relationship="Self.FK__Libro__IdAutor__164452B1" FromRole="Autor" ToRole="Libro" />
+        </EntityType>
+        <EntityType Name="Libro">
+          <Key>
+            <PropertyRef Name="IdLibro" />
+          </Key>
+          <Property Name="IdLibro" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="FechaPublicacion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="NumeroPaginas" Type="Int32" />
+          <Property Name="IdAutor" Type="Int32" />
+          <NavigationProperty Name="Autor" Relationship="Self.FK__Libro__IdAutor__164452B1" FromRole="Libro" ToRole="Autor" />
+        </EntityType>
+        <Association Name="FK__Libro__IdAutor__164452B1">
+          <End Role="Autor" Type="Self.Autor" Multiplicity="0..1" />
+          <End Role="Libro" Type="Self.Libro" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Autor">
+              <PropertyRef Name="IdAutor" />
+            </Principal>
+            <Dependent Role="Libro">
+              <PropertyRef Name="IdAutor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="VRodriguezLibroEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Autors" EntityType="Self.Autor" />
+          <EntitySet Name="Libroes" EntityType="Self.Libro" />
+          <AssociationSet Name="FK__Libro__IdAutor__164452B1" Association="Self.FK__Libro__IdAutor__164452B1">
+            <End Role="Autor" EntitySet="Autors" />
+            <End Role="Libro" EntitySet="Libroes" />
+          </AssociationSet>
+          <FunctionImport Name="AddLibro">
+            <Parameter Name="Nombre" Mode="In" Type="String" />
+            <Parameter Name="FechaPublicacion" Mode="In" Type="String" />
+            <Parameter Name="NumeroPaginas" Mode="In" Type="Int32" />
+            <Parameter Name="IdAutor" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="DeleteLibro">
+            <Parameter Name="IdLibro" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="GetAllLibro" ReturnType="Collection(VRodriguezLibroModel.GetAllLibro_Result)" />
+          <FunctionImport Name="GetByIdLibro" ReturnType="Collection(VRodriguezLibroModel.GetByIdLibro_Result)">
+            <Parameter Name="IdLibro" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="UpdateLibro">
+            <Parameter Name="IdLibro" Mode="In" Type="Int32" />
+            <Parameter Name="Nombre" Mode="In" Type="String" />
+            <Parameter Name="FechaPublicacion" Mode="In" Type="String" />
+            <Parameter Name="NumeroPaginas" Mode="In" Type="Int32" />
+            <Parameter Name="IdAutor" Mode="In" Type="Int32" />
+          </FunctionImport>
+        </EntityContainer>
+        <ComplexType Name="GetAllLibro_Result">
+          <Property Type="Int32" Name="IdLibro" Nullable="false" />
+          <Property Type="String" Name="Nombre" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="FechaPublicacion" Nullable="true" MaxLength="50" />
+          <Property Type="Int32" Name="NumeroPaginas" Nullable="true" />
+          <Property Type="Int32" Name="IdAutor" Nullable="false" />
+          <Property Type="String" Name="NombreAutor" Nullable="true" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="GetByIdLibro_Result">
+          <Property Type="Int32" Name="IdLibro" Nullable="false" />
+          <Property Type="String" Name="Nombre" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="FechaPublicacion" Nullable="true" MaxLength="50" />
+          <Property Type="Int32" Name="NumeroPaginas" Nullable="true" />
+          <Property Type="Int32" Name="IdAutor" Nullable="false" />
+          <Property Type="String" Name="NombreAutor" Nullable="true" MaxLength="50" />
+        </ComplexType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="VRodriguezLibroModelStoreContainer" CdmEntityContainer="VRodriguezLibroEntities">
+          <EntitySetMapping Name="Autors">
+            <EntityTypeMapping TypeName="VRodriguezLibroModel.Autor">
+              <MappingFragment StoreEntitySet="Autor">
+                <ScalarProperty Name="IdAutor" ColumnName="IdAutor" />
+                <ScalarProperty Name="NombreAutor" ColumnName="NombreAutor" />
+                <ScalarProperty Name="ApellidoPaterno" ColumnName="ApellidoPaterno" />
+                <ScalarProperty Name="ApellidoMaterno" ColumnName="ApellidoMaterno" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Libroes">
+            <EntityTypeMapping TypeName="VRodriguezLibroModel.Libro">
+              <MappingFragment StoreEntitySet="Libro">
+                <ScalarProperty Name="IdLibro" ColumnName="IdLibro" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="FechaPublicacion" ColumnName="FechaPublicacion" />
+                <ScalarProperty Name="NumeroPaginas" ColumnName="NumeroPaginas" />
+                <ScalarProperty Name="IdAutor" ColumnName="IdAutor" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="AddLibro" FunctionName="VRodriguezLibroModel.Store.AddLibro" />
+          <FunctionImportMapping FunctionImportName="DeleteLibro" FunctionName="VRodriguezLibroModel.Store.DeleteLibro" />
+          <FunctionImportMapping FunctionImportName="GetAllLibro" FunctionName="VRodriguezLibroModel.Store.GetAllLibro">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="VRodriguezLibroModel.GetAllLibro_Result">
+                <ScalarProperty Name="IdLibro" ColumnName="IdLibro" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="FechaPublicacion" ColumnName="FechaPublicacion" />
+                <ScalarProperty Name="NumeroPaginas" ColumnName="NumeroPaginas" />
+                <ScalarProperty Name="IdAutor" ColumnName="IdAutor" />
+                <ScalarProperty Name="NombreAutor" ColumnName="NombreAutor" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetByIdLibro" FunctionName="VRodriguezLibroModel.Store.GetByIdLibro">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="VRodriguezLibroModel.GetByIdLibro_Result">
+                <ScalarProperty Name="IdLibro" ColumnName="IdLibro" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="FechaPublicacion" ColumnName="FechaPublicacion" />
+                <ScalarProperty Name="NumeroPaginas" ColumnName="NumeroPaginas" />
+                <ScalarProperty Name="IdAutor" ColumnName="IdAutor" />
+                <ScalarProperty Name="NombreAutor" ColumnName="NombreAutor" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UpdateLibro" FunctionName="VRodriguezLibroModel.Store.UpdateLibro" />
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

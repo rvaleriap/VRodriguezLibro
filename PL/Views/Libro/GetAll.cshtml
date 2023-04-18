@@ -1,0 +1,60 @@
+﻿@model ML.Libro
+@{
+    ViewBag.Title = "GetAll";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+}
+
+<h2>Libro</h2>
+<div class="container">
+    <div class="row">
+        @Html.ActionLink("Agrega Libro", "Form", "Libro", htmlAttributes: new { @class = "btn btn-success" })
+    </div>
+    <div class="row">
+        @if (Model.Libros != null)
+        {
+            <table class="table table-bordered table-responsive" >
+                <thead>
+                    <tr>
+                        <td hidden>IdLibro</td>
+                        <td class="text-center" style="font-weight:bold">Editar</td>
+                        <td class="text-center" style="font-weight:bold">Nombre</td>
+                        <td class="text-center" style="font-weight:bold">Fecha de Publicacion</td>
+                        <td class="text-center" style="font-weight:bold">Numero Paginas</td>
+                        <td hidden>IdAutor</td>
+                        <td class="text-center" style="font-weight:bold">Nombre Autor</td>
+                        <td class="text-center" style="font-weight:bold">Eliminar</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (ML.Libro libro in Model.Libros)
+                    {
+                        <tr>
+                            <td class="text-center" ><a class="btn btn-warning" href="@Url.Action("Form", "Libro", new { IdLibro = libro.IdLibro})"></a></td>
+                            <td hidden>@libro.IdLibro</td>
+                            <td>@libro.Nombre</td>
+                            <td>@libro.FechaPublicacion</td>
+                            <td>@libro.NumeroPaginas</td>
+                            <td hidden>@libro.IdAutor</td>
+                            <td>@libro.Autor.NombreAutor</td>
+                            <td class="text-center"><a  class="btn btn-danger" href="@Url.Action("Delete", "Libro", new { IdLibro = libro.IdLibro})" onclick="return confirm('¿Desea eliminar el Libro?');"></a></td>
+
+                        </tr>
+                            }
+
+                    </tbody>
+            </table>
+
+        }
+        else
+        {
+            <div class="alert alert-danger" role="alert">Ocurrio un error al realizar la consulta</div>
+        }
+    </div>
+
+ </div>
+  
+
+
+
+

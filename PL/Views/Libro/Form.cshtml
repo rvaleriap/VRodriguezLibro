@@ -1,0 +1,41 @@
+﻿@model ML.Libro
+@{
+    ViewBag.Title = "Form";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Libro</h2>
+<div class="container">
+    <div class="row">
+        @using (Html.BeginForm("Form", "Libro", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {
+            <div class="row">
+                <div class="col-md-3">
+                    @Html.LabelFor(model => model.Nombre)
+                    @Html.TextBoxFor(model => model.Nombre, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.Nombre)
+                </div>
+                <div class="col-md-3">
+                    @Html.LabelFor(model => model.FechaPublicacion)
+                    @Html.TextBoxFor(model => model.FechaPublicacion, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.FechaPublicacion)
+                </div>
+                <div class="col-md-3">
+                    @Html.LabelFor(model => model.NumeroPaginas)
+                    @Html.TextBoxFor(model => model.NumeroPaginas, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.NumeroPaginas)
+                </div>
+                <div class="col-md-3">
+                    @Html.LabelFor(model => model.Autor.IdAutor)
+                    @Html.TextBoxFor(model => model.Autor.IdAutor, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.Autor.IdAutor)
+                </div>
+            </div>
+
+            <button type="submit" class="btn btn-success">Agregar</button>
+
+
+        }
+    </div>
+</div>
+
